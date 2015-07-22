@@ -1,0 +1,23 @@
+{
+  "name": "prufer",
+  "version": "0.1.0",
+  "description": "Prufer",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elgrancalavera/prufer.git"
+  },
+  "keywords": [
+    "prufer",
+    "graph"
+  ],
+  "author": "leoncoto@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elgrancalavera/prufer/issues"
+  },
+  "homepage": "https://github.com/elgrancalavera/prufer#readme"
+}
