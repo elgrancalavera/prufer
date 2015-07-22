@@ -1,5 +1,5 @@
 {
-  "name": "prufer",
+  "name": "@grancalavera/prufer",
   "version": "0.1.0",
   "description": "Prufer",
   "main": "index.js",
