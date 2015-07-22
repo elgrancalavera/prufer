@@ -1,7 +1,14 @@
 language: node_js
 node_js:
-  - iojs
-  - "0.12"
-  - "0.11"
-  - "0.10"
-
+- iojs
+- '0.12'
+- '0.11'
+- '0.10'
+deploy:
+  provider: npm
+  email: leoncoto@gmail.com
+  api_key:
+    secure: wakNh5tDyGxe63936IhjpBqMe3NYMwkmwmmgu+ETpIHUOarclEBmgV/ujukEx6LvQpxeFVXEuY4stQUaQ849y/HF04p8eRwMaSlOyLtBnz9WIy2uO6qKIRmKxuJ0rV3/aJ1iNi8ZjuADNnhXNuT6vcEHEBLXqbBlfL/EfmH2Frg0TRpUItbMQAAsPi3EkyjVz1+41KBlIOammSZzsRGAuVW3Pr1Cswm6QWnU+pkvpCL7C33kbgRWYzEvnLRHcn+QXoCRq80ScFI5WPB3ArF8BdCYwyFDWQ9ToGCpqy40H5T/4SArVtAvjQ4zyHQ4zh9swJU/FqgEqTApHZWkJngxKV28ZDHB9WpvD2XWl4BX6RM0u0ercOvmCqp/zUPgt+WstYHNIvla5nGJ0dBxuqUwEQcdbVLTWQybVXVFzp+v5EUIzv2eLWgu+cnubM5eu0/QVHjjPFJW96So2AT8XYnGQRYC4s7AajKsZOWceKftfmJAkPGtADz2Fd8btYBSAP4coVbRkT/A/E/tEuBaFDBYU1pCSeMLcHOBZK85oISjbCr7s6DoJqHC12Wc5luIGc160lI7dDk7YbRYPXhZyRXBEzfSqJIyHJZtLvdxirfoTFFmrkkAppBLQot4Mg6Nv6VpcV4ESITHU8jaNF9JsVgJYvJBZp2ntUZ1QQMegaF8KhM=
+  on:
+    tags: true
+    repo: elgrancalavera/prufer
