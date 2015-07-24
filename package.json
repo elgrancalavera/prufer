@@ -4,8 +4,7 @@
   "description": "Prufer",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js",
-    "debug": "node debug node_modules/tap/bin/run.js test/*.js"
+    "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
