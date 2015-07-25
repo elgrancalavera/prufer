@@ -104,7 +104,13 @@ function naiveIntProducer() {
 
 function beginMocking(mocks) {
   mocks.forEach(registerMock)
-  mockery.enable({ useCleanCache: true })
+  mockery.enable(
+    {
+      useCleanCache: true
+    , arnOnReplace: false
+    , warnOnUnregistered: false
+    }
+  )
 }
 
 function endMocking(mocks) {
