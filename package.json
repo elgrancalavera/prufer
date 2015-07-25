@@ -4,7 +4,7 @@
   "description": "Prufer",
   "main": "index.js",
   "scripts": {
-    "test": "jshint lib test && tap test/*.js",
+    "test": "jshint lib test && tap test/*.js && moment -f 'YYYY-MM-DD h:mm:ss a'",
     "start": "watch 'npm test' lib test"
   },
   "repository": {
@@ -23,6 +23,8 @@
   "homepage": "https://github.com/elgrancalavera/prufer#readme",
   "devDependencies": {
     "jshint": "^2.8.0",
+    "mockery": "^1.4.0",
+    "moment-cli": "0.0.4",
     "tap": "^1.3.1",
     "watch": "^0.16.0"
   },
