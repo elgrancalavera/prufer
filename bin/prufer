@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+// prufer random-sequence n
+// prufer random-tree n
+// prufer tree-from-sequence [n]
