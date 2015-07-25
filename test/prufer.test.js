@@ -1,10 +1,12 @@
 'use strict'
 
-var test = require('tap').test
+var _ = require('lodash')
+  , test = require('tap').test
   , mockery = require('mockery')
   , treeFromPrufer = require('../lib/tree-from-prufer')
   , range = require('../lib/simple-range')
   , randint = require('../lib/simple-randint')
+  , randomTree = require('../lib/random-tree')
 
 test('Arrays of integer sequences', function(t) {
   var expected = [0, 1, 2, 3, 4]
@@ -15,7 +17,7 @@ test('Arrays of integer sequences', function(t) {
 
 test('randint constrained to just 0', function(t) {
   var cases = range(5)
-    , expected = cases.map(constant(0))
+    , expected = cases.map(_.constant(0))
     , results = cases.map(rand(0, 0))
 
   t.same(expected, results, 'Should always be 0')
@@ -24,7 +26,7 @@ test('randint constrained to just 0', function(t) {
 
 test('randint constrained to 1', function(t) {
   var cases = range(5)
-    , expected = cases.map(constant(1))
+    , expected = cases.map(_.constant(1))
     , results = cases.map(rand(1, 1))
 
   t.same(expected, results, 'Should always be 1')
@@ -35,7 +37,7 @@ test('randint within range', function(t) {
   var min = 0
     , max = 10
     , cases = range(1000)
-    , expected = cases.map(constant(true))
+    , expected = cases.map(_.constant(true))
     , results = cases.map(rand(min, max)).map(isBetween(min, max))
 
   t.same(expected, results, 'Should always be between ' + min + ' and ' + max)
@@ -63,7 +65,7 @@ test('Genrating random Prüfer sequences', function(t) {
   beginMocking(mocks)
   randomPruferSequence = require('../lib/random-prufer-sequence')
 
-  t.throws(tooShort, 'Should throw for threes with less than 2 nodes')
+  t.throws(tooShort, 'Should throw for trees with less than 2 nodes')
   t.same(
     randomPruferSequence(10)
   , range(8)
@@ -71,7 +73,9 @@ test('Genrating random Prüfer sequences', function(t) {
     'than the requested number of nodes'
   )
 
-  t.tearDown(endMocking)
+  t.tearDown(function() {
+    endMocking(mocks)
+  })
   t.end()
 
   function tooShort() {
@@ -79,14 +83,15 @@ test('Genrating random Prüfer sequences', function(t) {
   }
 })
 
-function constant(x) {
-  return function() { return x }
-}
+test('Generating random trees by node count', function(t) {
+  var count = 10
+    , tree = randomTree(count)
+  t.equal(countNodes(tree), count, 'Should have the requested node count')
+  t.end()
+})
 
 function isBetween(min, max) {
-  return function(x) {
-    return x >= min && x <= max
-  }
+  return _.partial(_.inRange, _, min, max + 1)
 }
 
 function rand(min, max) {
@@ -103,10 +108,8 @@ function beginMocking(mocks) {
 }
 
 function endMocking(mocks) {
-  return function() {
-    mocks.forEach(deregisterMock)
-    mockery.disable()
-  }
+  mocks.forEach(deregisterMock)
+  mockery.disable()
 }
 
 function registerMock(mock) {
@@ -115,4 +118,8 @@ function registerMock(mock) {
 
 function deregisterMock(mock) {
   mockery.deregisterMock(mock.module)
+}
+
+function countNodes(tree) {
+  return _.chain(tree).flatten().uniq().value().length
 }

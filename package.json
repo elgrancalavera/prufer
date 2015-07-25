@@ -13,7 +13,9 @@
   },
   "keywords": [
     "prufer",
-    "graph"
+    "graph",
+    "tree",
+    "labeled tree"
   ],
   "author": "leoncoto@gmail.com",
   "license": "ISC",
@@ -23,6 +25,7 @@
   "homepage": "https://github.com/elgrancalavera/prufer#readme",
   "devDependencies": {
     "jshint": "^2.8.0",
+    "lodash": "^3.10.0",
     "mockery": "^1.4.0",
     "moment-cli": "0.0.4",
     "tap": "^1.3.1",
