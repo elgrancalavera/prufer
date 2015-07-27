@@ -9,9 +9,7 @@ var _ = require('lodash')
   , randomPruferSequence = require('../lib/random-prufer-sequence')
 
 test('Arrays of integer sequences', function(t) {
-  var expected = [0, 1, 2, 3, 4]
-
-  t.same(range(5), expected, 'Should return the same array.')
+  t.same(range(5), [0, 1, 2, 3, 4], 'Should return the same array.')
   t.end()
 })
 
