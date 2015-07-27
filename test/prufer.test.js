@@ -2,11 +2,11 @@
 
 var _ = require('lodash')
   , test = require('tap').test
-  , mockery = require('mockery')
   , treeFromPrufer = require('../lib/tree-from-prufer')
   , range = require('../lib/simple-range')
   , randint = require('../lib/simple-randint')
   , randomTree = require('../lib/random-tree')
+  , randomPruferSequence = require('../lib/random-prufer-sequence')
 
 test('Arrays of integer sequences', function(t) {
   var expected = [0, 1, 2, 3, 4]
@@ -54,40 +54,40 @@ test('Genrating trees from Prüfer sequences', function(t) {
 })
 
 test('Genrating random Prüfer sequences', function(t) {
-  var randomPruferSequence
-    , mocks = [
-      {
-        module:'./randint-producer'
-      , mock: naiveIntProducer
-      }
-    ]
-
-  beginMocking(mocks)
-  randomPruferSequence = require('../lib/random-prufer-sequence')
-
-  t.throws(tooShort, 'Should throw for trees with less than 2 nodes')
-  t.same(
-    randomPruferSequence(10)
-  , range(8)
-  , 'Should return a sequence 2 elements smaller ' +
-    'than the requested number of nodes'
-  )
-
-  t.tearDown(function() {
-    endMocking(mocks)
-  })
+  t.equal(
+      randomPruferSequence(10).length
+    , 10
+    , 'Should return a sequence  with the requested number of items'
+    )
   t.end()
-
-  function tooShort() {
-    return randomPruferSequence(1)
-  }
 })
 
 test('Generating random trees by node count', function(t) {
-  var count = 10
-    , tree = randomTree(count)
-  t.equal(countNodes(tree), count, 'Should have the requested node count')
+
+  t.throws(randomTreeLater(0), 'Should throw for less than 3 nodes')
+  t.throws(randomTreeLater(1), 'Should throw for less than 3 nodes')
+  t.throws(randomTreeLater(2), 'Should throw for less than 3 nodes')
+
+  t.equal(
+      countNodes(randomTree(3))
+    , 3
+    , 'Should have the requested node count'
+    )
+
+  t.equal(
+      countNodes(randomTree(10))
+    , 10
+    , 'Should have the requested node count'
+    )
+
   t.end()
+
+  function randomTreeLater(n) {
+    return function() {
+      randomTree(n)
+    }
+  }
+
 })
 
 function isBetween(min, max) {
@@ -96,34 +96,6 @@ function isBetween(min, max) {
 
 function rand(min, max) {
   return function() { return randint(min, max) }
-}
-
-function naiveIntProducer() {
-  return function(i) { return i }
-}
-
-function beginMocking(mocks) {
-  mocks.forEach(registerMock)
-  mockery.enable(
-    {
-      useCleanCache: true
-    , arnOnReplace: false
-    , warnOnUnregistered: false
-    }
-  )
-}
-
-function endMocking(mocks) {
-  mocks.forEach(deregisterMock)
-  mockery.disable()
-}
-
-function registerMock(mock) {
-  mockery.registerMock(mock.module, mock.mock)
-}
-
-function deregisterMock(mock) {
-  mockery.deregisterMock(mock.module)
 }
 
 function countNodes(tree) {
