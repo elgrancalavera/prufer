@@ -1,5 +1,45 @@
 #!/usr/bin/env node
 
-// prufer random-sequence n
-// prufer random-tree n
-// prufer tree-from-sequence [n]
+var cli = require('./cli')
+  , fs = require('fs')
+  , path = require('path')
+  , usage = fs.readFileSync(path.resolve(__dirname, 'usage.txt'), 'utf-8')
+
+if (cli.help || !cli.command) return console.log(usage)
+
+try {
+  var run = runtime()
+    , input = run.parser(cli.input)
+    , result = run.command(input)
+  console.log(JSON.stringify(result, null, 2))
+} catch (error) {
+  if (cli.debug) throw error
+  console.error(error.message)
+  process.exit(1)
+}
+
+function runtime() {
+  switch(cli.command) {
+    case 'tree': return resolve(intArrayParser, '../lib/tree')
+    case 'random-sequence': return resolve(intParser, '../lib/random-sequence')
+    case 'random-tree': return resolve(intParser, '../lib/random-tree')
+    default: throw new Error('Unknown command "' + command + '"')
+  }
+  function resolve(parser, command) {
+    return {
+      parser: parser
+    , command: require(command)
+    }
+  }
+}
+
+function intParser(input) {
+  var parsed = Number(input)
+  if (isNaN(parsed)) throw new Error(input + ' is not a number')
+  if (input.indexOf('.') !== -1) throw new Error('input must be an integer')
+  return parsed
+}
+
+function intArrayParser(input) {
+  return input.split(',').map(intParser)
+}

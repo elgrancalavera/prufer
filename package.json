@@ -4,8 +4,8 @@
   "description": "Prufer",
   "main": "index.js",
   "scripts": {
-    "test": "jshint lib test && tap test/*.test.js && moment -f 'YYYY-MM-DD h:mm:ss a'",
-    "start": "watch 'npm test' lib test"
+    "test": "jshint lib test bin && tap test/*.test.js && moment -f 'YYYY-MM-DD h:mm:ss a'",
+    "start": "watch 'npm test' lib test bin"
   },
   "repository": {
     "type": "git",

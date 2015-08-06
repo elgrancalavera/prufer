@@ -2,11 +2,11 @@
 
 var _ = require('lodash')
   , test = require('tap').test
-  , treeFromPrufer = require('../lib/tree-from-prufer')
+  , treeFromPrufer = require('../lib/tree')
   , range = require('../lib/simple-range')
   , randint = require('../lib/simple-randint')
   , randomTree = require('../lib/random-tree')
-  , randomPruferSequence = require('../lib/random-prufer-sequence')
+  , randomPruferSequence = require('../lib/random-sequence')
 
 test('Arrays of integer sequences', function(t) {
   t.same(range(5), [0, 1, 2, 3, 4], 'Should return the same array.')

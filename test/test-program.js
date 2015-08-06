@@ -1,11 +1,11 @@
 'use strict'
+
 var _ = require('lodash')
   , spawn = require('child_process').spawn
 
 module.exports = testProgram
 
 function testProgram(bin) {
-
   return function program(cmd, opts, cb) {
     cb = _.once(cb)
     cmd = [bin].concat(cmd)
@@ -36,5 +36,4 @@ function testProgram(bin) {
 
     return child
   }
-
 }
