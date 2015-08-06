@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-var cli = require('./cli')
-  , fs = require('fs')
+var fs = require('fs')
   , path = require('path')
-  , usage = fs.readFileSync(path.resolve(__dirname, 'usage.txt'), 'utf-8')
+  , cli = require('./cli')
 
-if (cli.help || !cli.command) return console.log(usage)
+if (cli.help || !cli.command) return console.log(usage())
 
 try {
   var run = runtime()
@@ -42,4 +41,11 @@ function intParser(input) {
 
 function intArrayParser(input) {
   return input.split(',').map(intParser)
+}
+
+function usage() {
+  return fs.readFileSync(
+    path.resolve(__dirname, 'usage.txt')
+  , 'utf-8'
+  )
 }
