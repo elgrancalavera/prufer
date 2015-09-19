@@ -12,6 +12,15 @@ test('prufer bin', function(t) {
   t.plan(8)
 
   prufer('--help', {}, function(err, code, stdout, stderr) {
+    console.log('.')
+    console.log('.')
+    console.log('.')
+    console.log('.')
+    console.log(stdout)
+    console.log('.')
+    console.log('.')
+    console.log('.')
+    console.log('.')
     t.ok(true, 'Should display help message')
   })
 
