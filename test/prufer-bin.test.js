@@ -12,23 +12,11 @@ test('prufer bin', function(t) {
   t.plan(8)
 
   prufer('--help', {}, function(err, code, stdout, stderr) {
-    console.log('.')
-    console.log('.')
-    console.log('.')
-    console.log('.')
-    console.log(err)
-    console.log(code)
-    console.log(stderr)
-    console.log(stdout)
-    console.log('.')
-    console.log('.')
-    console.log('.')
-    console.log('.')
-    t.ok(true, 'Should display help message')
+    t.ok(stdout, 'Should display help message')
   })
 
   prufer('-h', {}, function(err, code, stdout, stderr) {
-    t.ok(true, 'Should display help message')
+    t.ok(stdout, 'Should display help message')
   })
 
   prufer('random-tree 0', {}, function(err, code, stdout, stderr) {
