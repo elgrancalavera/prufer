@@ -3,7 +3,8 @@
 'use strict'
 
 var testProgram = require('./test-program')
-  , prufer = testProgram('bin/prufer')
+  , path = require('path')
+  , prufer = testProgram(reltoabs('../bin/prufer'))
   , test = require('tap').test
 
 test('prufer bin', function(t) {
@@ -43,3 +44,7 @@ test('prufer bin', function(t) {
   })
 
 })
+
+function reltoabs(apath) {
+  return path.join(__dirname, apath)
+}
