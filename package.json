@@ -4,7 +4,7 @@
   "description": "Prufer",
   "main": "index.js",
   "scripts": {
-    "test": "jshint lib test bin && tap test/*.test.js && moment -f 'YYYY-MM-DD h:mm:ss a'",
+    "test": "jshint lib test bin && tap test/*.test.js",
     "start": "watch 'npm test' lib test bin"
   },
   "repository": {
