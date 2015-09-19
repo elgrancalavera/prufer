@@ -1,4 +1,4 @@
-
+'use strict'
 
 var _ = require('lodash')
   , spawn = require('child_process').spawn
