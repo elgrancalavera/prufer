@@ -2,7 +2,7 @@
 
 'use strict'
 
-var testProgram = require('./test-program')
+var testProgram = require('@grancalavera/test-program')
   , path = require('path')
   , prufer = testProgram(reltoabs('../bin/prufer'))
   , test = require('tap').test
