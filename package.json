@@ -30,7 +30,8 @@
     "watch": "^0.16.0"
   },
   "dependencies": {
-    "nopt": "^3.0.4"
+    "nopt": "^3.0.4",
+    "random-int": "^1.0.0"
   },
   "engines": {
     "node": ">=6.3.1",
