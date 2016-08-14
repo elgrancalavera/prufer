@@ -1,20 +1,14 @@
 'use strict'
 
-var _ = require('lodash')
-  , test = require('tap').test
-  , treeFromPrufer = require('../lib/tree')
-  , range = require('../lib/simple-range')
-  , randint = require('../lib/simple-randint')
-  , randomTree = require('../lib/random-tree')
-  , randomPruferSequence = require('../lib/random-sequence')
-
-test('Arrays of integer sequences', function(t) {
-  t.same(range(5), [0, 1, 2, 3, 4], 'Should return the same array.')
-  t.end()
-})
+const _ = require('lodash')
+    , test = require('tap').test
+    , treeFromPrufer = require('../lib/tree')
+    , randint = require('../lib/simple-randint')
+    , randomTree = require('../lib/random-tree')
+    , randomPruferSequence = require('../lib/random-sequence')
 
 test('randint constrained to just 0', function(t) {
-  var cases = range(5)
+  var cases = _.range(0, 5)
     , expected = cases.map(_.constant(0))
     , results = cases.map(rand(0, 0))
 
@@ -23,7 +17,7 @@ test('randint constrained to just 0', function(t) {
 })
 
 test('randint constrained to 1', function(t) {
-  var cases = range(5)
+  var cases = _.range(0, 5)
     , expected = cases.map(_.constant(1))
     , results = cases.map(rand(1, 1))
 
@@ -34,7 +28,7 @@ test('randint constrained to 1', function(t) {
 test('randint within range', function(t) {
   var min = 0
     , max = 10
-    , cases = range(1000)
+    , cases = _.range(0, 1000)
     , expected = cases.map(_.constant(true))
     , results = cases.map(rand(min, max)).map(isBetween(min, max))
 
