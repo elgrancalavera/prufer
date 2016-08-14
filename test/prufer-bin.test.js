@@ -1,4 +1,4 @@
-'use strict'
+
 
 const testProgram = require('@grancalavera/test-program')
     , path = require('path')

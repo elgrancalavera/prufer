@@ -6,16 +6,16 @@ const _ = require('lodash')
     , randomTree = require('../lib/random-tree')
     , randomPruferSequence = require('../lib/random-sequence')
 
-test('Genrating trees from Prüfer sequences', function(t) {
-  var prufer = [3, 3, 3, 4]
-    , expected = [ [ 3, 0 ], [ 3, 1 ], [ 3, 2 ], [ 4, 3 ], [ 4, 5 ] ]
-    , tree = treeFromPrufer(prufer)
+test('Genrating trees from Prüfer sequences', (t) => {
+  const prufer = [3, 3, 3, 4]
+      , expected = [ [ 3, 0 ], [ 3, 1 ], [ 3, 2 ], [ 4, 3 ], [ 4, 5 ] ]
+      , tree = treeFromPrufer(prufer)
 
   t.same(tree, expected, 'Should return the expected tree.')
   t.end()
 })
 
-test('Genrating random Prüfer sequences', function(t) {
+test('Genrating random Prüfer sequences', (t) => {
   t.equal(
       randomPruferSequence(10).length
     , 10
@@ -24,11 +24,11 @@ test('Genrating random Prüfer sequences', function(t) {
   t.end()
 })
 
-test('Generating random trees by node count', function(t) {
+test('Generating random trees by node count', (t) => {
 
-  t.throws(randomTreeLater(0), 'Should throw for less than 3 nodes')
-  t.throws(randomTreeLater(1), 'Should throw for less than 3 nodes')
-  t.throws(randomTreeLater(2), 'Should throw for less than 3 nodes')
+  t.throws(() => randomTree(0), 'Should throw for less than 3 nodes')
+  t.throws(() => randomTree(1), 'Should throw for less than 3 nodes')
+  t.throws(() => randomTree(2), 'Should throw for less than 3 nodes')
 
   t.equal(
       countNodes(randomTree(3))
@@ -43,13 +43,6 @@ test('Generating random trees by node count', function(t) {
     )
 
   t.end()
-
-  function randomTreeLater(n) {
-    return function() {
-      randomTree(n)
-    }
-  }
-
 })
 
 function countNodes(tree) {
