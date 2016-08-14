@@ -8,7 +8,7 @@ const testProgram = require('@grancalavera/test-program')
 
 test('prufer bin', t => {
 
-  t.plan(9)
+  t.plan(10)
 
   prufer('--help', {}, function(err, code, stdout, stderr) {
     t.ok(stdout, 'Should display help message')
@@ -18,16 +18,36 @@ test('prufer bin', t => {
     t.ok(stdout, 'Should display help message')
   })
 
-  prufer(['random-tree', '0'], {}, function(err, code, stdout, stderr) {
-    t.match(stderr, /^randomTree requires at least 3 nodes/, 'must require at least 3 nodes')
+  prufer(['foo'], {}, (err, code, stdout, stderr) => {
+    t.match(
+      stderr
+    , /^Unknown command "foo"/
+    , 'Should fail with unkown commands'
+    )
+  })
+
+  prufer(['random-tree', '0'], {}, (err, code, stdout, stderr) => {
+    t.match(
+      stderr
+    , /^randomTree requires at least 3 nodes/
+    , 'must require at least 3 nodes'
+    )
   })
 
   prufer(['random-tree', '1'], {}, (err, code, stdout, stderr) => {
-    t.match(stderr, /^randomTree requires at least 3 nodes/, 'must require at least 3 nodes')
+    t.match(
+      stderr
+    , /^randomTree requires at least 3 nodes/
+    , 'must require at least 3 nodes'
+    )
   })
 
   prufer(['random-tree', '2'], {}, (err, code, stdout, stderr) => {
-    t.match(stderr, /^randomTree requires at least 3 nodes/, 'must require at least 3 nodes')
+    t.match(
+      stderr
+    , /^randomTree requires at least 3 nodes/
+    , 'must require at least 3 nodes'
+    )
   })
 
   prufer(['random-tree', '3'], {}, (err, code, stdout, stderr) => {
