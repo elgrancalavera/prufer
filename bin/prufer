@@ -56,7 +56,7 @@ Usage: prufer <command>
 where <command> is one of:
     random-sequence, random-tree, tree-from-sequence
 
-prufer --help -h        shows this screen
+prufer --help [-h]                Shows this screen
 
 prufer random-sequence <length>   Generates a random Prüfer sequence
                                   with the given length
@@ -67,5 +67,6 @@ prufer random-tree <node count>   Generates a random tree (graph)
 prufer tree <Prüfer sequence>     Generates the tree (graph) corresponding
                                   to the given Prüfer sequence. A Prüfer
                                   sequence must be written as a list of
-                                  integers enclosed in quotes: "3,3,3,4"`
+                                  integers enclosed in quotes: "3,3,3,4"
+`
 }
