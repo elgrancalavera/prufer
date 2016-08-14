@@ -8,9 +8,9 @@ var fs = require('fs')
 if (cli.help || !cli.command) return console.log(usage())
 
 try {
-  var run = runtime()
-    , input = run.parser(cli.input)
-    , result = run.command(input)
+  const run = runtime()
+      , input = run.parser(cli.input)
+      , result = run.command(input)
   console.log(JSON.stringify(result, null, 2))
 } catch (error) {
   if (cli.debug) throw error
