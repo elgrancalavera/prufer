@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-var fs = require('fs')
-  , path = require('path')
-  , cli = require('./cli')
-  , prufer = require('../lib')
+const fs = require('fs')
+    , path = require('path')
+    , cli = require('./cli')
+    , prufer = require('../lib')
 
 if (cli.help || !cli.command) return console.log(usage())
 
 try {
-  const run = runtime()
+  const run = runtime(cli.command)
       , input = run.parser(cli.input)
       , result = run.command(input)
   console.log(JSON.stringify(result, null, 2))
@@ -18,13 +18,23 @@ try {
   process.exit(1)
 }
 
-function runtime() {
+function runtime(cli_command) {
   const resolve = (parser, command) => ({ parser, command })
-  switch(cli.command) {
-    case 'tree': return resolve(intArrayParser, prufer.tree)
-    case 'random-sequence': return resolve(intParser, prufer.randomSequence)
-    case 'random-tree': return resolve(intParser, prufer.randomTree)
-    default: throw new Error(`Unknown command "${ cli.command }"`)
+
+  switch(cli_command) {
+
+    case 'tree':
+      return resolve(intArrayParser, prufer.tree)
+
+    case 'random-sequence':
+      return resolve(intParser, prufer.randomSequence)
+
+    case 'random-tree':
+      return resolve(intParser, prufer.randomTree)
+
+    default:
+      throw new Error(`Unknown command "${ cli_command }"`)
+
   }
 }
 
@@ -47,6 +57,15 @@ where <command> is one of:
     random-sequence, random-tree, tree-from-sequence
 
 prufer --help -h        shows this screen
-prufer <cmd> --help -h  quick help on <cmd>
-`
+
+prufer random-sequence <length>   Generates a random Prüfer sequence
+                                  with the given length
+
+prufer random-tree <node count>   Generates a random tree (graph)
+                                  with the given node count
+
+prufer tree <Prüfer sequence>     Generates the tree (graph) corresponding
+                                  to the given Prüfer sequence. A Prüfer
+                                  sequence must be written as a list of
+                                  integers enclosed in quotes: "3,3,3,4"`
 }
