@@ -3,6 +3,7 @@
 var fs = require('fs')
   , path = require('path')
   , cli = require('./cli')
+  , prufer = require('../lib')
 
 if (cli.help || !cli.command) return console.log(usage())
 

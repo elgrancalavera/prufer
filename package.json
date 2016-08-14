@@ -2,7 +2,7 @@
   "name": "@grancalavera/prufer",
   "version": "0.2.3",
   "description": "Prufer",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "tap test/*.test.js",
     "dev": "watch 'npm test' lib test bin"
