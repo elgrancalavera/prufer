@@ -19,23 +19,14 @@ try {
 }
 
 function runtime(cli_command) {
-  const resolve = (parser, command) => ({ parser, command })
-
   switch(cli_command) {
-
-    case 'tree':
-      return resolve(intArrayParser, prufer.tree)
-
-    case 'random-sequence':
-      return resolve(intParser, prufer.randomSequence)
-
-    case 'random-tree':
-      return resolve(intParser, prufer.randomTree)
-
-    default:
-      throw new Error(`Unknown command "${ cli_command }"`)
-
+    case 'tree':            return wrap(intArrayParser, prufer.tree)
+    case 'random-sequence': return wrap(intParser, prufer.randomSequence)
+    case 'random-tree':     return wrap(intParser, prufer.randomTree)
+    default:                throw error()
   }
+  function wrap(parser, command) { return {parser, command }}
+  function error() { return new Error(`Unknown command "${ cli_command }"`) }
 }
 
 function intParser(input) {
