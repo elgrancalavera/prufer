@@ -1,4 +1,4 @@
-# Prüfer
+# prufer
 
 [![Build Status](https://travis-ci.org/elgrancalavera/prufer.svg?branch=master)](https://travis-ci.org/elgrancalavera/prufer)
 
