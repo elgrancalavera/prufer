@@ -40,8 +40,13 @@ function intArrayParser(input) {
 }
 
 function usage() {
-  return fs.readFileSync(
-    path.resolve(__dirname, 'usage.txt')
-  , 'utf-8'
-  )
+  return `
+Usage: prufer <command>
+
+where <command> is one of:
+    random-sequence, random-tree, tree-from-sequence
+
+prufer --help -h        shows this screen
+prufer <cmd> --help -h  quick help on <cmd>
+`
 }

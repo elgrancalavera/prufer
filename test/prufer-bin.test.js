@@ -11,11 +11,11 @@ test('prufer bin', t => {
   t.plan(10)
 
   prufer('--help', {}, function(err, code, stdout, stderr) {
-    t.ok(stdout, 'Should display help message')
+    t.match(stdout, /Usage\: prufer/, 'Should display help message')
   })
 
   prufer('-h', {}, (err, code, stdout, stderr) => {
-    t.ok(stdout, 'Should display help message')
+    t.match(stdout, /Usage\: prufer/, 'Should display help message')
   })
 
   prufer(['foo'], {}, (err, code, stdout, stderr) => {
