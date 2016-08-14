@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
-var fs = require('fs')
-  , path = require('path')
-  , cli = require('./cli')
+const fs = require('fs')
+    , path = require('path')
+    , cli = require('./cli')
+    , prufer = require('../lib')
 
 if (cli.help || !cli.command) return console.log(usage())
 
 try {
-  var run = runtime()
-    , input = run.parser(cli.input)
-    , result = run.command(input)
+  const run = runtime(cli.command)
+      , input = run.parser(cli.input)
+      , result = run.command(input)
   console.log(JSON.stringify(result, null, 2))
 } catch (error) {
   if (cli.debug) throw error
@@ -17,19 +18,15 @@ try {
   process.exit(1)
 }
 
-function runtime() {
-  switch(cli.command) {
-    case 'tree': return resolve(intArrayParser, '../lib/tree')
-    case 'random-sequence': return resolve(intParser, '../lib/random-sequence')
-    case 'random-tree': return resolve(intParser, '../lib/random-tree')
-    default: throw new Error('Unknown command "' + command + '"')
+function runtime(cli_command) {
+  switch(cli_command) {
+    case 'tree':            return wrap(intArrayParser, prufer.tree)
+    case 'random-sequence': return wrap(intParser, prufer.randomSequence)
+    case 'random-tree':     return wrap(intParser, prufer.randomTree)
+    default:                throw error()
   }
-  function resolve(parser, command) {
-    return {
-      parser: parser
-    , command: require(command)
-    }
-  }
+  function wrap(parser, command) { return {parser, command }}
+  function error() { return new Error(`Unknown command "${ cli_command }"`) }
 }
 
 function intParser(input) {
@@ -44,8 +41,23 @@ function intArrayParser(input) {
 }
 
 function usage() {
-  return fs.readFileSync(
-    path.resolve(__dirname, 'usage.txt')
-  , 'utf-8'
-  )
+  return `
+Usage: prufer <command>
+
+where <command> is one of:
+    random-sequence, random-tree, tree-from-sequence
+
+prufer --help [-h]                Shows this screen
+
+prufer random-sequence <length>   Generates a random Prüfer sequence
+                                  with the given length
+
+prufer random-tree <node count>   Generates a random tree (graph)
+                                  with the given node count
+
+prufer tree <Prüfer sequence>     Generates the tree (graph) corresponding
+                                  to the given Prüfer sequence. A Prüfer
+                                  sequence must be written as a list of
+                                  integers enclosed in quotes: "3,3,3,4"
+`
 }

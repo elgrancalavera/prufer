@@ -1,7 +1,0 @@
-Usage: prufer <command>
-
-where <command> is one of:
-    random-sequence, random-tree, tree-from-sequence
-
-prufer --help -h        shows this screen
-prufer <cmd> --help -h  quick help on <cmd>

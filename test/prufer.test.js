@@ -1,100 +1,46 @@
 'use strict'
 
-var _ = require('lodash')
-  , test = require('tap').test
-  , treeFromPrufer = require('../lib/tree')
-  , range = require('../lib/simple-range')
-  , randint = require('../lib/simple-randint')
-  , randomTree = require('../lib/random-tree')
-  , randomPruferSequence = require('../lib/random-sequence')
+const _ = require('lodash')
+    , test = require('tap').test
+    , prufer = require('../lib')
 
-test('Arrays of integer sequences', function(t) {
-  t.same(range(5), [0, 1, 2, 3, 4], 'Should return the same array.')
-  t.end()
-})
-
-test('randint constrained to just 0', function(t) {
-  var cases = range(5)
-    , expected = cases.map(_.constant(0))
-    , results = cases.map(rand(0, 0))
-
-  t.same(expected, results, 'Should always be 0')
-  t.end()
-})
-
-test('randint constrained to 1', function(t) {
-  var cases = range(5)
-    , expected = cases.map(_.constant(1))
-    , results = cases.map(rand(1, 1))
-
-  t.same(expected, results, 'Should always be 1')
-  t.end()
-})
-
-test('randint within range', function(t) {
-  var min = 0
-    , max = 10
-    , cases = range(1000)
-    , expected = cases.map(_.constant(true))
-    , results = cases.map(rand(min, max)).map(isBetween(min, max))
-
-  t.same(expected, results, 'Should always be between ' + min + ' and ' + max)
-  t.end()
-})
-
-test('Genrating trees from Prüfer sequences', function(t) {
-  var prufer = [3, 3, 3, 4]
-    , expected = [ [ 3, 0 ], [ 3, 1 ], [ 3, 2 ], [ 4, 3 ], [ 4, 5 ] ]
-    , tree = treeFromPrufer(prufer)
+test('Genrating trees from Prüfer sequences', (t) => {
+  const expected = [[3, 0], [3,1], [3, 2], [4, 3], [4, 5]]
+      , tree = prufer.tree([3, 3, 3, 4])
 
   t.same(tree, expected, 'Should return the expected tree.')
   t.end()
 })
 
-test('Genrating random Prüfer sequences', function(t) {
+test('Genrating random Prüfer sequences', (t) => {
   t.equal(
-      randomPruferSequence(10).length
+      prufer.randomSequence(10).length
     , 10
     , 'Should return a sequence  with the requested number of items'
     )
   t.end()
 })
 
-test('Generating random trees by node count', function(t) {
+test('Generating random trees by node count', (t) => {
 
-  t.throws(randomTreeLater(0), 'Should throw for less than 3 nodes')
-  t.throws(randomTreeLater(1), 'Should throw for less than 3 nodes')
-  t.throws(randomTreeLater(2), 'Should throw for less than 3 nodes')
+  t.throws(() => prufer.randomTree(0), 'Should throw for less than 3 nodes')
+  t.throws(() => prufer.randomTree(1), 'Should throw for less than 3 nodes')
+  t.throws(() => prufer.randomTree(2), 'Should throw for less than 3 nodes')
 
   t.equal(
-      countNodes(randomTree(3))
+      countNodes(prufer.randomTree(3))
     , 3
     , 'Should have the requested node count'
     )
 
   t.equal(
-      countNodes(randomTree(10))
+      countNodes(prufer.randomTree(10))
     , 10
     , 'Should have the requested node count'
     )
 
   t.end()
-
-  function randomTreeLater(n) {
-    return function() {
-      randomTree(n)
-    }
-  }
-
 })
-
-function isBetween(min, max) {
-  return _.partial(_.inRange, _, min, max + 1)
-}
-
-function rand(min, max) {
-  return function() { return randint(min, max) }
-}
 
 function countNodes(tree) {
   return _.chain(tree).flatten().uniq().value().length
