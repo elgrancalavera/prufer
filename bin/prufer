@@ -19,14 +19,15 @@ try {
 }
 
 function runtime(cli_command) {
+  const cmd = (parser, command) => ({ parser, command })
+      , err = () => new Error(`Unknown command "${ cli_command }"`)
+
   switch(cli_command) {
-    case 'tree':            return wrap(intArrayParser, prufer.tree)
-    case 'random-sequence': return wrap(intParser, prufer.randomSequence)
-    case 'random-tree':     return wrap(intParser, prufer.randomTree)
-    default:                throw error()
+    case 'tree':            return cmd(intArrayParser, prufer.tree)
+    case 'random-sequence': return cmd(intParser, prufer.randomSequence)
+    case 'random-tree':     return cmd(intParser, prufer.randomTree)
+    default:                throw err()
   }
-  function wrap(parser, command) { return {parser, command }}
-  function error() { return new Error(`Unknown command "${ cli_command }"`) }
 }
 
 function intParser(input) {
@@ -55,9 +56,9 @@ prufer random-sequence <length>   Generates a random Prüfer sequence
 prufer random-tree <node count>   Generates a random tree (graph)
                                   with the given node count
 
-prufer tree <Prüfer sequence>     Generates the tree (graph) corresponding
-                                  to the given Prüfer sequence. A Prüfer
-                                  sequence must be written as a list of
-                                  integers enclosed in quotes: "3,3,3,4"
+prufer tree <Prüfer code>         Generates the tree (graph) corresponding
+                                  to the given Prüfer code. A Prüfer code
+                                  must be written as a list of integers
+                                  enclosed in quotes: "3,3,3,4"
 `
 }
