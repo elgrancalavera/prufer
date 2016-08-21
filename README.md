@@ -24,7 +24,7 @@ prufer.randomSequence(5)
 
 ### `prufer.randomTree(nodeCount)`
 
-- `nodeCount` `<Integer>` `<2`
+- `nodeCount` `<Integer>` (greater than 2)
 
 The `prufer.randomTree()` function returns a random tree (undirected graph) of the given `nodeCount`, where `nodeCount` is greater than 2.
 
