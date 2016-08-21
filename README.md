@@ -57,11 +57,11 @@ prufer.tree([3, 3, 3, 4])
 Usage: prufer <command>
 
 where <command> is one of:
-    random-sequence, random-tree, tree-from-sequence
+    random-code, random-tree, tree
 
 prufer --help [-h]                Shows this screen
 
-prufer random-sequence <length>   Generates a random Prüfer sequence
+prufer random-code <length>       Generates a random Prüfer code
                                   with the given length
 
 prufer random-tree <node count>   Generates a random tree (graph)

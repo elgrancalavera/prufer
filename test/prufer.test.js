@@ -4,7 +4,7 @@ const _ = require('lodash')
     , test = require('tap').test
     , prufer = require('../lib')
 
-test('Genrating trees from Prüfer sequences', (t) => {
+test('Genrating trees from Prüfer codes', (t) => {
   const expected = [[3, 0], [3,1], [3, 2], [4, 3], [4, 5]]
       , tree = prufer.tree([3, 3, 3, 4])
 
@@ -12,9 +12,9 @@ test('Genrating trees from Prüfer sequences', (t) => {
   t.end()
 })
 
-test('Genrating random Prüfer sequences', (t) => {
+test('Genrating random Prüfer codes', (t) => {
   t.equal(
-      prufer.randomSequence(10).length
+      prufer.randomCode(10).length
     , 10
     , 'Should return a sequence  with the requested number of items'
     )

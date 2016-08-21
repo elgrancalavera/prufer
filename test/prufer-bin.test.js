@@ -55,14 +55,14 @@ test('prufer bin', t => {
     t.ok(Array.isArray(tree), 'should return a tree')
   })
 
-  prufer(['random-sequence', '0'], {}, (err, code, stdout, stderr) => {
+  prufer(['random-code', '0'], {}, (err, code, stdout, stderr) => {
     const seq = JSON.parse(stdout)
-    t.same(seq, [], 'should produce an empty sequence')
+    t.same(seq, [], 'should produce an empty code')
   })
 
-  prufer(['random-sequence', '10'], {}, (err, code, stdout, stderr) => {
+  prufer(['random-code', '10'], {}, (err, code, stdout, stderr) => {
     const seq = JSON.parse(stdout)
-    t.same(seq.length, 10, 'should pruduce a sequence with known length')
+    t.same(seq.length, 10, 'should pruduce a code with known length')
   })
 
   prufer(['tree', '3,3,3,4'], {}, (err, code, stdout, stderr) => {
