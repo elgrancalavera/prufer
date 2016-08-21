@@ -3,6 +3,7 @@
   "version": "1.0.0-1",
   "description": "Prufer",
   "main": "lib/index.js",
+  "bin": "bin/prufer",
   "scripts": {
     "test": "tap test/*.test.js",
     "dev": "watch 'npm test' lib test bin"
