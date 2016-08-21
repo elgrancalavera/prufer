@@ -42,7 +42,7 @@ prufer.randomTree(5)
 
 - `pruferCode` `<Array>` of `<Integer>`
 
-The `prufer.tree()` function returns the graph corresponding to the given [Prüfer code][prufer-code].
+The `prufer.tree()` function returns the tree corresponding to the given [Prüfer code][prufer-code].
 
 For example:
 
