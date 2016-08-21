@@ -49,7 +49,7 @@ For example:
 ```
 prufer.tree([3, 3, 3, 4])
   // returns [[3, 0], [3,1], [3, 2], [4, 3], [4, 5]]
-``
+```
 
 ## CLI Usage
 
