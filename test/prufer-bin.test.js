@@ -8,7 +8,7 @@ const testProgram = require('@grancalavera/test-program')
 
 test('prufer bin', t => {
 
-  t.plan(10)
+  t.plan(11)
 
   prufer('--help', {}, function(err, code, stdout, stderr) {
     t.match(stdout, /Usage\: prufer/, 'Should display help message')
@@ -65,9 +65,15 @@ test('prufer bin', t => {
     t.same(seq.length, 10, 'should pruduce a code with known length')
   })
 
-  prufer(['tree', '3,3,3,4'], {}, (err, code, stdout, stderr) => {
+  prufer(['tree', '[3,3,3,4]'], {}, (err, code, stdout, stderr) => {
     const expected = [[3, 0], [3,1], [3, 2], [4, 3], [4, 5]]
         , actual = JSON.parse(stdout)
     t.same(actual, expected, 'should produce a known tree')
+  })
+
+  prufer(['tree', '[ 3 ,3  ,3  ,4   ]'], {}, (err, code, stdout, stderr) => {
+    const expected = [[3, 0], [3,1], [3, 2], [4, 3], [4, 5]]
+        , actual = JSON.parse(stdout)
+    t.same(actual, expected, 'whitespace should not matter')
   })
 })
