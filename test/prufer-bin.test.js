@@ -22,7 +22,7 @@ test('prufer bin', t => {
     t.match(
       stderr
     , /^Unknown command "foo"/
-    , 'Should fail with unkown commands'
+    , 'Should fail with unknown commands'
     )
   })
 
