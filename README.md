@@ -69,8 +69,8 @@ prufer random-tree <node count>   Generates a random tree (graph)
 
 prufer tree <Prüfer code>         Generates the tree (graph) corresponding
                                   to the given Prüfer code. A Prüfer code
-                                  must be written as a list of integers
-                                  enclosed in quotes: "3,3,3,4"
+                                  must be written as a JSON Array of integers:
+                                  "[3,3,3,4]"
 ```
 
 [prufer-code]:http://mathworld.wolfram.com/PrueferCode.html
