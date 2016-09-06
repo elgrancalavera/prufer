@@ -6,7 +6,7 @@ const testProgram = require('@grancalavera/test-program')
 
 test('prufer bin', t => {
 
-  t.plan(13)
+  t.plan(17)
 
   prufer('--help', {}, function(err, code, stdout, stderr) {
     t.match(stdout, /Usage\: prufer/, 'Should display help message')
@@ -82,6 +82,22 @@ test('prufer bin', t => {
 
   prufer(['tree', '[1.5, 2.5, 3.5, 4.5]'], {}, (err, code, stdout, stderr) => {
     t.notEqual(code, 0, 'expecting error code for non-integer arrays')
+  })
+
+  prufer(['random-code', 'a'], {}, (err, code, stdout, stderr) => {
+    t.notEqual(code, 0, 'expecting error code for non-number input')
+  })
+
+  prufer(['random-tree', 'a'], {}, (err, code, stdout, stderr) => {
+    t.notEqual(code, 0, 'expecting error code for non-number input')
+  })
+
+  prufer(['random-code', '1.5'], {}, (err, code, stdout, stderr) => {
+    t.notEqual(code, 0, 'expecting error code for non-integer input')
+  })
+
+  prufer(['random-tree', '1.5'], {}, (err, code, stdout, stderr) => {
+    t.notEqual(code, 0, 'expecting error code for non-integer input')
   })
 
 })
