@@ -1,5 +1,3 @@
-
-
 const testProgram = require('@grancalavera/test-program')
     , path = require('path')
     , bin = path.resolve(__dirname, '../bin/prufer')
