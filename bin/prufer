@@ -34,7 +34,7 @@ function runtime(cli_command) {
 
 function intParser(input) {
   var parsed = Number(input)
-  if (!isInteger(parsed)) throw new Error(`'${ input }' must be an integer`)
+  if (!isInteger(parsed)) throw new Error(`'${ input }' is not an integer`)
   return parsed
 }
 
