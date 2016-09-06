@@ -4,6 +4,7 @@ const fs = require('fs')
     , path = require('path')
     , cli = require('./cli')
     , prufer = require('../lib')
+    , isInteger = require('lodash').isInteger
 
 if (cli.version) return console.log(require('../package.json').version)
 if (cli.help || !cli.command) return console.log(usage())
@@ -33,13 +34,16 @@ function runtime(cli_command) {
 
 function intParser(input) {
   var parsed = Number(input)
-  if (isNaN(parsed)) throw new Error(input + ' is not a number')
-  if (input.indexOf('.') !== -1) throw new Error('input must be an integer')
+  if (!isInteger(parsed)) throw new Error(`'${ input }' must be an integer`)
   return parsed
 }
 
 function intArrayParser(input) {
-  return JSON.parse(input)
+  try {
+    return JSON.parse(input).map(intParser)
+  } catch (e) {
+    throw new Error(`Unable to parse input '${ input }' as an Integer Array: \n${ e.message }`)
+  }
 }
 
 function usage() {
