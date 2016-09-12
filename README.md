@@ -8,18 +8,18 @@
 
 ## API
 
-### `prufer.randomSequence(length)`
+### `prufer.randomCode(length)`
 
 - `length` `<Integer>`
 
-The `prufer.randomSequence()` function returns a random [Prüfer code][prufer-code] of the given `length`.
+The `prufer.randomCode()` function returns a random [Prüfer code][prufer-code] of the given `length`.
 
 For example:
 
 ```
-prufer.randomSequence(5)
+prufer.randomCode(5)
   // returns [4, 1, 2, 4, 4]
-  // (or any other random Prufer code)
+  // (or any other random Prufer code with length equal to five)
 ```
 
 ### `prufer.randomTree(nodeCount)`
