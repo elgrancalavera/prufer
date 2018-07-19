@@ -6,6 +6,12 @@
 * Generates random graphs
 * Generates graphs from Prüfer codes
 
+## Installation
+
+```
+npm install -g @grancalavera/prufer
+```
+
 ## API
 
 ### `prufer.randomCode(length)`
